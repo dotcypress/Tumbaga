@@ -136,10 +136,10 @@ namespace Tumbaga.IoC
             {
                 var fullPropertyName = instance.GetType().FullName + PropertySplitter + propertyInfo.Name;
                 propertyInfo.SetValue(instance,
-                                      ContainsKey(instance.GetType(), fullPropertyName)
-                                          ? Resolve(null, fullPropertyName)
-                                          : Resolve(propertyInfo.PropertyType),
-                                      null);
+                    ContainsKey(instance.GetType(), fullPropertyName)
+                        ? Resolve(null, fullPropertyName)
+                        : Resolve(propertyInfo.PropertyType),
+                    null);
             }
         }
 
@@ -168,8 +168,8 @@ namespace Tumbaga.IoC
                 }
             }
             return ContainsKey(type, key)
-                       ? _resolverHolders.First(x => x.Type == type && x.Key == key).CreationFunction()
-                       : BuildFromType(type);
+                ? _resolverHolders.First(x => x.Type == type && x.Key == key).CreationFunction()
+                : BuildFromType(type);
         }
 
         private bool ContainsKey(Type type, string key)
@@ -196,8 +196,8 @@ namespace Tumbaga.IoC
         private object Instantiate(Type type)
         {
             var constructor = type.GetTypeInfo().DeclaredConstructors
-                .OrderByDescending(c => c.GetParameters().Length)
-                .FirstOrDefault();
+                                  .OrderByDescending(c => c.GetParameters().Length)
+                                  .FirstOrDefault();
             if (constructor == null)
             {
                 throw new IocException("Could not locate a constructor for " + type.FullName);
@@ -206,10 +206,10 @@ namespace Tumbaga.IoC
             var parameterInfos = constructor.GetParameters();
             var constructorParams = new List<object>(parameterInfos.Length);
             constructorParams.AddRange(parameterInfos.
-                                           Select(parameterInfo => new {parameterInfo, fullParamName = type.FullName + ConstructorParameterSplitter + parameterInfo.Name}).
-                                           Select(@t => ContainsKey(type, @t.fullParamName)
-                                                            ? Resolve(null, @t.fullParamName)
-                                                            : Resolve(@t.parameterInfo.ParameterType)));
+                Select(parameterInfo => new {parameterInfo, fullParamName = type.FullName + ConstructorParameterSplitter + parameterInfo.Name}).
+                Select(@t => ContainsKey(type, @t.fullParamName)
+                    ? Resolve(null, @t.fullParamName)
+                    : Resolve(@t.parameterInfo.ParameterType)));
             try
             {
                 return constructor.Invoke(constructorParams.ToArray());

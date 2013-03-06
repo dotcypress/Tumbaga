@@ -19,8 +19,11 @@ namespace Tumbaga
 {
     public abstract class Bootstrapper : Application
     {
-        protected Bootstrapper()
+        private readonly Type _startupPageType;
+
+        protected Bootstrapper(Type startupPageType)
         {
+            _startupPageType = startupPageType;
             Container = new IocContainer();
             ViewModelMap = new ViewModelMap();
             InitContainer();
@@ -78,7 +81,7 @@ namespace Tumbaga
         {
             Window.Current.Activated += CurrentActivated;
             Window.Current.Closed += CurrentClosed;
-            Container.Resolve<INavigationManager>().Navigate(StartupPageType);
+            Container.Resolve<INavigationManager>().Navigate(_startupPageType);
         }
 
         private void CurrentClosed(object sender, CoreWindowEventArgs e)
@@ -98,8 +101,6 @@ namespace Tumbaga
         public IocContainer Container { get; private set; }
 
         public ViewModelMap ViewModelMap { get; private set; }
-
-        public Type StartupPageType { get; set; }
 
         #endregion
     }

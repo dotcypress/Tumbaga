@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Data;
 namespace Tumbaga.Converters
 {
     /// <summary>
-    ///   Value converter that translates true to false and vice versa.
+    ///     Value converter that translates true to false and vice versa.
     /// </summary>
     public sealed class BooleanNegationConverter : IValueConverter
     {

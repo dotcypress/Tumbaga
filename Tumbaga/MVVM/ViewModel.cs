@@ -52,6 +52,8 @@ namespace Tumbaga.MVVM
 
         #region Virtual members
 
+        protected internal Control RootElement { get; private set; }
+
         protected virtual void OnCreate()
         {
         }
@@ -63,8 +65,6 @@ namespace Tumbaga.MVVM
         protected virtual void OnUnload()
         {
         }
-
-        protected internal Control RootElement { get; private set; }
 
         #endregion
 

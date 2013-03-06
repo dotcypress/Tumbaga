@@ -28,6 +28,8 @@ namespace Tumbaga.Commands
             _navigationManager.Navigate<T>(parameter);
         }
 
+        public event EventHandler CanExecuteChanged;
+
         public void OnCanExecutedChanged()
         {
             if (CanExecuteChanged != null)
@@ -35,7 +37,5 @@ namespace Tumbaga.Commands
                 CanExecuteChanged(this, new EventArgs());
             }
         }
-
-        public event EventHandler CanExecuteChanged;
     }
 }

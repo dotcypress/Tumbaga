@@ -11,9 +11,9 @@ namespace Tumbaga.Messaging
     internal class MessagePublisher : IMessagePublisher
     {
         private readonly Dictionary<Type, List<object>> _receivers = new Dictionary<Type, List<object>>();
-        private readonly Dictionary<Type, List<WeakReference>> _weakReceivers = new Dictionary<Type, List<WeakReference>>();
 
         private readonly object _syncLock = new object();
+        private readonly Dictionary<Type, List<WeakReference>> _weakReceivers = new Dictionary<Type, List<WeakReference>>();
 
         public void RegisterWeak<T>(IMessageReceiver<T> newReceiver) where T : BaseMessage
         {

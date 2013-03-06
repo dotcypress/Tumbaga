@@ -37,6 +37,11 @@ namespace Tumbaga.IoC
 
         public object Instance { get; set; }
 
+        public bool Equals(ObjectHolder other)
+        {
+            return Equals((object) other);
+        }
+
         public override string ToString()
         {
             return string.Format("({0}:{1})", Type, Key);
@@ -46,11 +51,6 @@ namespace Tumbaga.IoC
         {
             var comparer = EqualityComparer<object>.Default;
             return Extensions.CombineHashCodes(comparer.GetHashCode(Type), comparer.GetHashCode(Key));
-        }
-
-        public bool Equals(ObjectHolder other)
-        {
-            return Equals((object) other);
         }
 
         public override bool Equals(object obj)

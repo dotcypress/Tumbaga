@@ -19,6 +19,11 @@ namespace Tumbaga.Common
 
         public T2 Item2 { get; private set; }
 
+        public bool Equals(Tuple<T1, T2> other)
+        {
+            return Equals((object) other);
+        }
+
         public override string ToString()
         {
             return string.Format("({0},{1})", Item1, Item2);
@@ -28,11 +33,6 @@ namespace Tumbaga.Common
         {
             var comparer = EqualityComparer<object>.Default;
             return Extensions.CombineHashCodes(comparer.GetHashCode(Item1), comparer.GetHashCode(Item2));
-        }
-
-        public bool Equals(Tuple<T1, T2> other)
-        {
-            return Equals((object) other);
         }
 
         public override bool Equals(object obj)
@@ -60,6 +60,11 @@ namespace Tumbaga.Common
 
         public T3 Item3 { get; private set; }
 
+        public bool Equals(Tuple<T1, T2, T3> other)
+        {
+            return Equals((object) other);
+        }
+
         public override string ToString()
         {
             return string.Format("({0}, {1}, {2})", Item1, Item2, Item3);
@@ -78,13 +83,8 @@ namespace Tumbaga.Common
             var comparerT2 = EqualityComparer<T2>.Default;
             var comparerT3 = EqualityComparer<T3>.Default;
             return t != null && comparerT1.Equals(Item1, t.Item1)
-                   && comparerT2.Equals(Item2, t.Item2)
-                   && comparerT3.Equals(Item3, t.Item3);
-        }
-
-        public bool Equals(Tuple<T1, T2, T3> other)
-        {
-            return Equals((object) other);
+                && comparerT2.Equals(Item2, t.Item2)
+                && comparerT3.Equals(Item3, t.Item3);
         }
     }
 }
