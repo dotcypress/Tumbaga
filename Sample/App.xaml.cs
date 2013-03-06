@@ -10,7 +10,7 @@ using Tumbaga;
 
 namespace Sample
 {
-    sealed partial class App : Bootstrapper
+    sealed partial class App : AppBootstrapper
     {
         public App()
             : base(typeof (MainPage))

@@ -17,11 +17,11 @@ using Windows.UI.Xaml.Controls;
 
 namespace Tumbaga
 {
-    public abstract class Bootstrapper : Application
+    public abstract class AppBootstrapper : Application
     {
         private readonly Type _startupPageType;
 
-        protected Bootstrapper(Type startupPageType)
+        protected AppBootstrapper(Type startupPageType)
         {
             _startupPageType = startupPageType;
             Container = new IocContainer();

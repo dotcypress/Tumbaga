@@ -11,11 +11,11 @@ namespace Tumbaga.Navigation
 {
     internal class NavigationManager : INavigationManager
     {
-        private readonly Bootstrapper _bootstrapper;
+        private readonly AppBootstrapper _bootstrapper;
         private readonly Window _window;
         private object _state;
 
-        public NavigationManager(Window window, Bootstrapper bootstrapper)
+        public NavigationManager(Window window, AppBootstrapper bootstrapper)
         {
             _window = window;
             _bootstrapper = bootstrapper;
