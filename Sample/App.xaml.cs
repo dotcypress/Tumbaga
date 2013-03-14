@@ -20,6 +20,7 @@ namespace Sample
         private void InitBootstrapper()
         {
             ViewModelMap.Register<MainPage, MainPageViewModel>();
+            ViewModelMap.Register<HelpPage, HelpPageViewModel>();
         }
     }
 }

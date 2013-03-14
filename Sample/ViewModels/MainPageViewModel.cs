@@ -3,6 +3,7 @@
 using System;
 using System.Windows.Input;
 using Sample.Core;
+using Sample.Views;
 using Tumbaga.Commands;
 using Tumbaga.IoC;
 using Tumbaga.MVVM;
@@ -45,6 +46,9 @@ namespace Sample.ViewModels
                 }); }
         }
 
+        [Inject]
+        public NavigateCommand<HelpPage> OpenAboutCommand { get; set; }
+        
         [Inject]
         public Calculator Calculator { get; set; }
 
