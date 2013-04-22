@@ -12,8 +12,7 @@ namespace Tumbaga.Commands
         private readonly Predicate<T> _canExecute;
         private readonly Action<T> _execute;
 
-        public RelayCommand(Action<T> execute)
-            : this(execute, x => true)
+        public RelayCommand(Action<T> execute) : this(execute, x => true)
         {
         }
 

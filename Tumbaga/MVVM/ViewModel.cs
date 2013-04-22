@@ -37,11 +37,13 @@ namespace Tumbaga.MVVM
                 return false;
             }
             storage = value;
+// ReSharper disable ExplicitCallerInfoArgument
             OnPropertyChanged(propertyName);
+// ReSharper restore ExplicitCallerInfoArgument
             return true;
         }
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             var eventHandler = PropertyChanged;
             if (eventHandler != null)

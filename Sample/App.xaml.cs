@@ -9,8 +9,7 @@ namespace Sample
 {
     sealed partial class App : AppBootstrapper
     {
-        public App()
-            : base(typeof (MainPage))
+        public App() : base(typeof (MainPage))
         {
             InitializeComponent();
             InitBootstrapper();
