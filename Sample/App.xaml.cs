@@ -1,6 +1,5 @@
 ﻿#region
 
-using Sample.ViewModels;
 using Sample.Views;
 using Tumbaga;
 
