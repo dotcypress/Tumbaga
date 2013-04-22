@@ -1,8 +1,8 @@
 ﻿<tumbaga:AppBootstrapper x:Class="Sample.App"
-                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:tumbaga="using:Tumbaga">
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:tumbaga="using:Tumbaga">
     <Application.Resources>
-        <ResourceDictionary Source="/Assets/StandardStyles.xaml"/>
+        <ResourceDictionary Source="/Assets/StandardStyles.xaml" />
     </Application.Resources>
 </tumbaga:AppBootstrapper>

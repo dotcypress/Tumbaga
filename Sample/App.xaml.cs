@@ -19,7 +19,8 @@ namespace Sample
 
         private void InitBootstrapper()
         {
-            ViewModelMap.Register<MainPage, MainPageViewModel>();
+            //Use autoresolve
+            //ViewModelMap.Register<MainPage, MainPageViewModel>();
         }
     }
 }
