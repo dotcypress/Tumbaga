@@ -14,9 +14,10 @@ namespace Tumbaga.MVVM
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        internal void Create(UserControl rootElement)
+        internal void Create(UserControl rootElement, object state)
         {
             RootElement = rootElement;
+            State = state;
             OnCreate();
         }
 
@@ -55,6 +56,8 @@ namespace Tumbaga.MVVM
         #region Virtual members
 
         protected internal Control RootElement { get; private set; }
+
+        protected object State { get; private set; }
 
         protected virtual void OnCreate()
         {

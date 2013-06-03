@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
 using Tumbaga.MVVM;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,18 +13,13 @@ namespace Tumbaga.Navigation
     internal class NavigationManager : INavigationManager
     {
         private readonly AppBootstrapper _bootstrapper;
+        private readonly Stack<UserControl> _history = new Stack<UserControl>();
         private readonly Window _window;
-        private object _state;
 
         public NavigationManager(Window window, AppBootstrapper bootstrapper)
         {
             _window = window;
             _bootstrapper = bootstrapper;
-        }
-
-        public T GetState<T>()
-        {
-            return (T) _state;
         }
 
         public void Navigate<TPage>(object state = null)
@@ -42,8 +38,8 @@ namespace Tumbaga.Navigation
                     currentViewModel.Unload();
                     currentPage.Loaded -= currentViewModel.RootElementLoaded;
                 }
+                _history.Push(currentPage);
             }
-            _state = state;
             var page = (UserControl) _bootstrapper.Container.Resolve(pageType);
             _window.Content = page;
 
@@ -55,11 +51,24 @@ namespace Tumbaga.Navigation
                 page.Loaded += viewModel.RootElementLoaded;
                 if (viewModel.RootElement == null)
                 {
-                    viewModel.Create(page);
+                    viewModel.Create(page, state);
                 }
             }
             _window.Activate();
             _bootstrapper.InvalidateVisualState();
+        }
+
+        public void NavigateBack()
+        {
+            var page = _history.Pop();
+            _window.Content = page;
+            _window.Activate();
+            _bootstrapper.InvalidateVisualState();
+        }
+
+        public bool CanNavigateBack()
+        {
+            return _history.Count > 0;
         }
     }
 }

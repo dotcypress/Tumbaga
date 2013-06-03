@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Commands\NavigateBackCommand.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Common\Extensions.cs" />

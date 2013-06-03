@@ -13,7 +13,7 @@ namespace Sample.ViewModels
     public class HelpPageViewModel : ViewModel
     {
         [Inject]
-        public NavigateCommand<MainPage> NavigateBackCommand { get; set; }
+        public NavigateBackCommand NavigateBackCommand { get; set; }
 
         protected override void OnLoad()
         {

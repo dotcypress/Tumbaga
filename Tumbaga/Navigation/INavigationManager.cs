@@ -12,6 +12,7 @@ namespace Tumbaga.Navigation
 
         void Navigate(Type pageType, object state = null);
 
-        TState GetState<TState>();
+        void NavigateBack();
+        bool CanNavigateBack();
     }
 }
