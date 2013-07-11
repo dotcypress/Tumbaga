@@ -113,6 +113,7 @@
     <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Common\MetroGrid.cs" />
     <Compile Include="Common\Tuple.cs" />
     <Compile Include="Converters\BooleanNegationConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />

@@ -14,10 +14,5 @@ namespace Sample.ViewModels
     {
         [Inject]
         public NavigateBackCommand NavigateBackCommand { get; set; }
-
-        protected override void OnLoad()
-        {
-            MetroGridHelper.CreateGrid();
-        }
     }
 }

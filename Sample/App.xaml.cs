@@ -13,6 +13,7 @@ namespace Sample
         {
             InitializeComponent();
             InitBootstrapper();
+            EnableGrid = true;
         }
 
         private void InitBootstrapper()

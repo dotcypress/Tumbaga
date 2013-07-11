@@ -20,6 +20,7 @@ namespace Tumbaga
     public abstract class AppBootstrapper : Application
     {
         private readonly Type _startupPageType;
+        private bool _enableGrid;
 
         protected AppBootstrapper(Type startupPageType)
         {
@@ -31,6 +32,8 @@ namespace Tumbaga
         }
 
         #region Init
+
+        protected bool EnableGrid { get; set; }
 
         private void InitContainer()
         {
@@ -52,11 +55,24 @@ namespace Tumbaga
 
         internal void InvalidateVisualState()
         {
-            var currentPage = Window.Current.Content as UserControl;
+            var root = Window.Current.Content as Grid;
+            if (root == null)
+            {
+                return;
+            }
+            var currentPage = root.Children.Count > 1 ? root.Children[0] as UserControl : null;
             if (currentPage == null)
             {
                 return;
             }
+
+            var grid = root.Children.Count > 1 ? root.Children[1] as Grid : null;
+            if (grid != null)
+            {
+                grid.Visibility = EnableGrid ? Visibility.Visible : Visibility.Collapsed;
+            }
+
+
             var currentViewModel = currentPage.DataContext as ViewModel;
             if (currentViewModel != null)
             {

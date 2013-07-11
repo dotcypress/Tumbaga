@@ -46,9 +46,5 @@ namespace Sample.ViewModels
         [Inject]
         public Calculator Calculator { get; set; }
 
-        protected override void OnLoad()
-        {
-            MetroGridHelper.CreateGrid();
-        }
     }
 }
