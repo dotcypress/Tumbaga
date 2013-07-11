@@ -20,7 +20,6 @@ namespace Tumbaga
     public abstract class AppBootstrapper : Application
     {
         private readonly Type _startupPageType;
-        private bool _enableGrid;
 
         protected AppBootstrapper(Type startupPageType)
         {
