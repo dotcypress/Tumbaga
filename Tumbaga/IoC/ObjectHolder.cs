@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using Tumbaga.Common;
 
 #endregion
 
@@ -10,16 +9,7 @@ namespace Tumbaga.IoC
 {
     internal class ObjectHolder : IEquatable<ObjectHolder>
     {
-        public ObjectHolder(Type type, string key) : this(type, key, null)
-        {
-        }
-
-        public ObjectHolder(Type type, string key, Func<object> creationFunction)
-            : this(type, key, creationFunction, false)
-        {
-        }
-
-        public ObjectHolder(Type type, string key, Func<object> creationFunction, bool isSingleton)
+        public ObjectHolder(Type type, string key, Func<object> creationFunction = null, bool isSingleton = false)
         {
             Type = type;
             Key = key;
@@ -50,7 +40,7 @@ namespace Tumbaga.IoC
         public override int GetHashCode()
         {
             var comparer = EqualityComparer<object>.Default;
-            return Extensions.CombineHashCodes(comparer.GetHashCode(Type), comparer.GetHashCode(Key));
+            return CombineHashCodes(comparer.GetHashCode(Type), comparer.GetHashCode(Key));
         }
 
         public override bool Equals(object obj)
@@ -59,6 +49,11 @@ namespace Tumbaga.IoC
             var typeComparer = EqualityComparer<Type>.Default;
             var keyComparer = EqualityComparer<string>.Default;
             return t != null && typeComparer.Equals(Type, t.Type) && keyComparer.Equals(Key, t.Key);
+        }
+
+        private static int CombineHashCodes(int hash, int anotherHash)
+        {
+            return (hash << 5) + hash ^ anotherHash;
         }
     }
 }

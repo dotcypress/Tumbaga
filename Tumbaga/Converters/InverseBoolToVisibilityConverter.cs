@@ -1,25 +1,27 @@
 ﻿#region
 
 using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
 #endregion
 
 namespace Tumbaga.Converters
 {
-    /// <summary>
-    ///     Value converter that translates true to false and vice versa.
-    /// </summary>
-    public sealed class BooleanNegationConverter : IValueConverter
+    public class InverseBoolToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return !(value is bool && (bool) value);
+            if (value is bool)
+            {
+                return !(bool) value ? Visibility.Visible : Visibility.Collapsed;
+            }
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return !(value is bool && (bool) value);
+            throw new NotImplementedException();
         }
     }
 }

@@ -20,9 +20,10 @@ namespace Tumbaga.Common
         {
             var lambda = (LambdaExpression) property;
             MemberExpression memberExpression;
-            if (lambda.Body is UnaryExpression)
+            var body = lambda.Body as UnaryExpression;
+            if (body != null)
             {
-                var unaryExpression = (UnaryExpression) lambda.Body;
+                var unaryExpression = body;
                 memberExpression = (MemberExpression) unaryExpression.Operand;
             }
             else
@@ -36,9 +37,10 @@ namespace Tumbaga.Common
         {
             var lambda = (LambdaExpression) property;
             MemberExpression memberExpression;
-            if (lambda.Body is UnaryExpression)
+            var body = lambda.Body as UnaryExpression;
+            if (body != null)
             {
-                var unaryExpression = (UnaryExpression) lambda.Body;
+                var unaryExpression = body;
                 memberExpression = (MemberExpression) unaryExpression.Operand;
             }
             else
@@ -66,6 +68,84 @@ namespace Tumbaga.Common
 
         #endregion
 
+        #region Collections
+
+        public static void ForEach<T>(this IEnumerable<T> items, Action<T> action)
+        {
+            foreach (var item in items)
+            {
+                action(item);
+            }
+        }
+
+        #endregion
+
+        #region Strings
+
+        public static string Ellipsize(this string input, int maxLenght)
+        {
+            if (!string.IsNullOrWhiteSpace(input) && input.Length > maxLenght)
+            {
+                return input.Substring(0, maxLenght - 1) + "...";
+            }
+            return input;
+        }
+
+        public static string Capitalize(this string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return string.Empty;
+            }
+            return char.ToUpper(input[0]) + input.Substring(1);
+        }
+
+        #endregion
+
+        #region Helpers
+
+        public static TResult With<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator)
+            where TResult : class
+            where TInput : class
+        {
+            return input == null ? null : evaluator(input);
+        }
+
+        public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, TResult failureValue) where TInput : class
+        {
+            return input == null ? failureValue : evaluator(input);
+        }
+
+        public static TInput If<TInput>(this TInput input, Func<TInput, bool> evaluator) where TInput : class
+        {
+            if (input == null)
+            {
+                return null;
+            }
+            return evaluator(input) ? input : null;
+        }
+
+        public static TInput Unless<TInput>(this TInput input, Func<TInput, bool> evaluator) where TInput : class
+        {
+            if (input == null)
+            {
+                return null;
+            }
+            return evaluator(input) ? null : input;
+        }
+
+        public static TInput Do<TInput>(this TInput input, Action<TInput> action) where TInput : class
+        {
+            if (input == null)
+            {
+                return null;
+            }
+            action(input);
+            return input;
+        }
+
+        #endregion
+
         #region Visual tree
 
         public static IEnumerable<DependencyObject> GetAncestors(this DependencyObject node)
@@ -84,10 +164,5 @@ namespace Tumbaga.Common
         }
 
         #endregion
-
-        internal static int CombineHashCodes(int hash, int anotherHash)
-        {
-            return (hash << 5) + hash ^ anotherHash;
-        }
     }
 }
