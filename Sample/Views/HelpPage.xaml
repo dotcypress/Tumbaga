@@ -18,6 +18,7 @@
 
         <StackPanel x:Name="Main" Grid.Row="1" Margin="120,0,0,0">
             <TextBlock Text="Help text" Style="{StaticResource PageSubheaderTextStyle}" />
+            <TextBlock Text="About tumbaga" Margin="0,10,0,0"/>
         </StackPanel>
 
         <VisualStateManager.VisualStateGroups>

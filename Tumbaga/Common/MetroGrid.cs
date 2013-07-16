@@ -20,7 +20,7 @@ namespace Tumbaga.Common
         {
             SizeChanged += (s, e) => Rebuild();
             IsHitTestVisible = false;
-            Opacity = 0.2;
+            Opacity = 0.15;
             Visibility=Visibility.Collapsed;
         }
 
@@ -40,7 +40,9 @@ namespace Tumbaga.Common
 
         private IEnumerable<Shape> GetGridShapesForMargin(int margin)
         {
-            var brush = new SolidColorBrush(Colors.Fuchsia);
+            var marginBrush = new SolidColorBrush(Colors.Blue);
+            var unitBrush = new SolidColorBrush(Colors.Red);
+            var subUnitBrush = (Brush)Application.Current.Resources["ApplicationSecondaryForegroundThemeBrush"];
             var max = Math.Max(ActualWidth, ActualHeight);
 
             const double strokeWidth = 2.0;
@@ -48,7 +50,7 @@ namespace Tumbaga.Common
             var horizontalLine = new Line
             {
                 IsHitTestVisible = false,
-                Stroke = brush,
+                Stroke = marginBrush,
                 X1 = 0,
                 X2 = max,
                 Y1 = 100 + (strokeWidth/2),
@@ -59,11 +61,11 @@ namespace Tumbaga.Common
             var horizontalLine2 = new Line
             {
                 IsHitTestVisible = false,
-                Stroke = brush,
+                Stroke = marginBrush,
                 X1 = 0,
                 X2 = max,
-                Y1 = 140 + (strokeWidth/2),
-                Y2 = 140 + (strokeWidth/2),
+                Y1 = 140 - (strokeWidth/2),
+                Y2 = 140 - (strokeWidth/2),
                 StrokeThickness = strokeWidth,
             };
             yield return horizontalLine2;
@@ -71,7 +73,7 @@ namespace Tumbaga.Common
             var verticalLine = new Line
             {
                 IsHitTestVisible = false,
-                Stroke = brush,
+                Stroke = marginBrush,
                 X1 = margin - (strokeWidth/2),
                 X2 = margin - (strokeWidth/2),
                 Y1 = 0,
@@ -83,18 +85,18 @@ namespace Tumbaga.Common
             var horizontalBottomLine = new Line
             {
                 IsHitTestVisible = false,
-                Stroke = brush,
+                Stroke = marginBrush,
                 X1 = 0,
                 X2 = max,
                 Y1 = ActualHeight - 130 + (strokeWidth/2),
                 Y2 = ActualHeight - 130 + (strokeWidth/2),
                 StrokeThickness = strokeWidth,
             };
-            yield return  horizontalBottomLine;
+            yield return horizontalBottomLine;
             var horizontalBottomLine2 = new Line
             {
                 IsHitTestVisible = false,
-                Stroke = brush,
+                Stroke = marginBrush,
                 X1 = 0,
                 X2 = max,
                 Y1 = ActualHeight - 50 + (strokeWidth/2),
@@ -109,6 +111,7 @@ namespace Tumbaga.Common
             {
                 for (var y = 140; y < max; y += (tileHeight*2))
                 {
+
                     var rect = new Rectangle
                     {
                         Width = tileHeight,
@@ -117,10 +120,39 @@ namespace Tumbaga.Common
                         HorizontalAlignment = HorizontalAlignment.Left,
                         Margin = new Thickness(x, y, 0, 0),
                         IsHitTestVisible = false,
-                        Fill = brush,
+                        Fill = unitBrush,
                     };
                     yield return rect;
                 }
+            }
+            for (var x = margin; x < max; x += (tileHeight/4))
+            {
+                yield return new Line
+                {
+                    IsHitTestVisible = false,
+                    Stroke = subUnitBrush,
+                    Opacity = 0.5,
+                    X1 = x,
+                    X2 = x,
+                    Y1 = 140,
+                    Y2 = max,
+                    StrokeThickness = strokeWidth,
+                };
+
+            }
+            for (var y = 140; y < max; y += (tileHeight/4))
+            {
+                yield return new Line
+                {
+                    IsHitTestVisible = false,
+                    Stroke = subUnitBrush,
+                    Opacity = 0.5,
+                    X1 = margin,
+                    X2 = max,
+                    Y1 = y,
+                    Y2 = y,
+                    StrokeThickness = strokeWidth,
+                };
             }
         }
     }

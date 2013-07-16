@@ -17,9 +17,9 @@
         </Grid>
 
         <StackPanel x:Name="Main" Grid.Row="1" Margin="120,0,0,0">
-            <TextBox Text="{Binding X, Mode=TwoWay}" Margin="0,0,0,6" HorizontalAlignment="Left" Width="150" />
-            <TextBox Text="{Binding Y, Mode=TwoWay}" Margin="0,0,0,6" HorizontalAlignment="Left" Width="150" />
-            <Button Content="Calculate" Command="{Binding CalculateCommand}" Margin="0,0,0,6" />
+            <TextBox Text="{Binding X, Mode=TwoWay}" Margin="0,0,0,10" HorizontalAlignment="Left" Width="150" />
+            <TextBox Text="{Binding Y, Mode=TwoWay}" Margin="0,0,0,10" HorizontalAlignment="Left" Width="150" />
+            <Button Content="Calculate" Command="{Binding CalculateCommand}" Margin="0,0,0,10" />
             <TextBlock Text="{Binding Result}" />
         </StackPanel>
 
