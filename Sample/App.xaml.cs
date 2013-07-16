@@ -1,5 +1,6 @@
 ﻿#region
 
+using Sample.Core;
 using Sample.Views;
 using Tumbaga;
 
@@ -18,8 +19,8 @@ namespace Sample
 
         private void InitBootstrapper()
         {
-            //Use autoresolve
-            //ViewModelMap.Register<MainPage, MainPageViewModel>();
+            Container.RegisterInstance(new Calculator(0));
+            Container.RegisterInstance(new Calculator(10), "hacked");
         }
     }
 }

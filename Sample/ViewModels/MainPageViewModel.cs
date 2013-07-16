@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Diagnostics;
 using System.Windows.Input;
 using Sample.Core;
 using Sample.Views;
@@ -46,5 +47,13 @@ namespace Sample.ViewModels
         [Inject]
         public Calculator Calculator { get; set; }
 
+        [Inject("hacked")]
+        public Calculator HackedCalculator { get; set; }
+
+        protected override void OnLoad()
+        {
+            Debug.WriteLine("Normal: 1 + 1 = {0}", Calculator.Add(1, 1));
+            Debug.WriteLine("Hacked: 1 + 1 = {0}", HackedCalculator.Add(1, 1));
+        }
     }
 }
